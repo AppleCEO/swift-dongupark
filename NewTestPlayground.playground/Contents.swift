@@ -79,3 +79,91 @@ for code in dicA.keys {
 for code in dicA.values {
     "\(code)"
 }
+
+var n = 5
+var m = 10
+
+if n == m {
+    print("n and m is equal")
+}
+else if n < m {
+    print("m is larger than n")
+}
+else {
+    print("n is larger than m")
+}
+
+for index in 1...5 {
+    "\(index) times 4 is \(index*4)"
+}
+
+var base = 2
+var power = 9
+var answer = 1
+
+for _ in 1...power {
+    answer *= base
+}
+
+for _ in 1...power {
+    answer *= base
+}
+
+// String형을 열거하는 for-in
+for ch in "HELLO" {
+    print(ch)
+}
+
+// String형을 Character형으로 열거하는 for-in
+// enumerate()는 index와 문자값의 쌍으로 열거함
+for (idx,ch) in "HELLO".enumerated()
+{
+    print("index : "+String(idx)+" "+String(ch))
+}
+
+var ch = "A"
+
+switch ch {
+case "A" :
+    fallthrough
+case "a" :
+    "match"
+default :
+    "unmatch"
+}
+
+var letter = "A"
+
+switch letter {
+case "A"..."Z":
+    "알파벳 대문자"
+case "a"..."z":
+    "알파벳 소문자"
+default:
+    "알파벳 아님"
+}
+
+let aChar : Character = "z"
+switch aChar {
+case "a", "e", "i", "o", "u":
+    print("\(aChar)는 모음")
+case "a"..."z":
+    print("\(aChar)는 자음")
+default:
+    print("\(aChar)는 자음도 모음도 아님")
+}
+
+var strInput = "Swift is very fast"
+var strOutput = ""
+
+// continue 문을 만나면 더이상의 조건 검사를 중지함
+for ch in strInput {
+    switch ch {
+    case " " :
+//        continue
+        fallthrough
+    default :
+        strOutput.append(ch)
+    }
+}
+strOutput
