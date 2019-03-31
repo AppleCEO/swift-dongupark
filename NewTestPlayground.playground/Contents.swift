@@ -167,3 +167,110 @@ for ch in strInput {
     }
 }
 strOutput
+
+
+// 5강 기초함수
+
+// 입력된 정수에 10을 더하여 반환하는 함수
+func Add10(num: Int) -> (Int) {
+    let result = num + 10
+    return result
+}
+
+n = 20
+print("Before Add10(n), n = \(n)")
+n = Add10(num: n)
+print("After Add10(n), n = \(n)")
+
+
+func getPersonInfo() -> (Int, String, Int)
+{
+    return (27, "홍길동", 182)
+}
+
+var person = getPersonInfo()
+
+
+func swap(p1: Int, p2:Int) -> (Int,Int)
+{
+    return (p2, p1)
+}
+
+var n1 = 100, n2 = 200
+
+print("before swap : n1 = \(n1), n2 = \(n2)")
+(n1, n2) = swap(p1: n1, p2: n2)
+print("after swap : n1 = \(n1), n2 = \(n2)")
+
+
+// swift는 함수 중복정의를 허용함
+func greetings() {
+    print("Hello, Guys!")
+}
+
+// 매개변수 name을 가진 greetings() 함수
+func greetings(name: String) {
+    print("Hello, \(name)!")
+}
+
+greetings()
+greetings(name: "홍길동")
+
+
+// 6강 고급함수
+
+func join(s1: String, s2: String, joiner: String) -> String {
+    return s1 + joiner + s2
+}
+
+join(s1: "hello", s2: "world", joiner: ", ")
+
+// 함수 레이블을 통해서 매개변수의 의미를 명확하게 함
+func join(string s1: String, toString s2: String, withJoiner joiner: String) -> String {
+    return s1 + joiner + s2
+}
+
+join(string: "춘향", toString: "이몽룡", withJoiner: " 그리고 ")
+join(string: "로미오", toString: "줄리엣", withJoiner: " , ")
+
+func arithmeticMean(numbers: Double...) -> Double {
+    var total: Double = 0
+    for number in numbers {
+        total += number
+    }
+    return total / Double(numbers.count)
+}
+
+arithmeticMean(numbers: 1,2,3,4,5,6,7,8)
+//8 정수의 산술평균 4.5를 반환함
+arithmeticMean(numbers: 3,8,19)
+// 3,8,19의 산술평균 10을 반환함
+
+// 함수 타입에 대해 알아봅시다 -1
+func addTwoInts(a: Int, b: Int) -> Int {
+    return a + b
+}
+
+func multTwoInts(a: Int, b: Int) -> Int {
+    return a * b
+}
+
+addTwoInts(a: 1, b: 3)
+multTwoInts(a: 1, b: 3)
+
+// mathFunction은 함수타입 변수임
+var mathFunction: (Int, Int) -> Int
+mathFunction = addTwoInts
+
+mathFunction(1,3)
+
+// 함수타입(형) 변수에 레이블을 사용할 경우 error
+//mathFunction(a: 2, b: 3)
+
+mathFunction = multTwoInts
+mathFunction(1,3)
+
+func printMathResult(mathFunction: (Int, Int) -> Int, a: Int, b: Int){
+    print("Result: \(mathFunction(a, b))")
+}
+printMathResult(mathFunction: addTwoInts, a: 3, b: 5)
