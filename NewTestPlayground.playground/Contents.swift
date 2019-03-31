@@ -1,3 +1,3 @@
 import UIKit
 
-var str = "Hello, playground"
+print("헬로 Swift")
