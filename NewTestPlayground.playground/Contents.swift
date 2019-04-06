@@ -398,4 +398,76 @@ let newDoubler = {(i:Int) -> Int in return i * 2}
 newDoubler(3)
 let arrayE = array.map(newDoubler)
 
+// 10강 열거형, 구조체, 클래스
+enum Compass {
+    case North
+    case South
+    case East
+    case West
+}
 
+enum CompassPoint {
+    case North, South, East, West
+}
+
+var directionToBusan : Compass
+directionToBusan = Compass.East
+directionToBusan = .West
+
+enum Barcode {
+    case UPCA(Int, Int, Int, Int), QRCodes(String)
+}
+
+var productBarcode = Barcode.UPCA(8, 77777, 11100, 3)
+productBarcode = .QRCodes("ABCDEFGHIJK")
+
+// productBarcode가 Barcode의 멤버중 일치되는 형이 있으면 진행
+switch productBarcode {
+case .UPCA(let numberSystem, let manufacturer, let product, let check) :
+    print("UPC-A : \(numberSystem), \(manufacturer), \(product)")
+case .QRCodes(let productCode) :
+    print("QR : \(productCode)")
+}
+
+
+// Planet enumeration에 rawValue 할당이 가능
+enum Planet : Int {
+    case Mercury = 1, Venus, Earth, Mars, Jupitor, Saturn, Uranus, Neptune
+}
+
+enum Planets : Int {
+    case Mercury, Venus, Earth, Mars, Jupitor, Saturn, Uranus, Neptune
+}
+
+Planet.Mercury
+Planet.Mercury.rawValue
+Planet.Venus.rawValue
+
+Planets.Mercury.rawValue
+
+// 구조체, 클래스
+
+struct Resolution {
+    var width = 0
+    var height = 0
+    func description() -> Void {
+        print("Resolution width = \(width), height = \(height)")
+    }
+}
+
+class VideoMode {
+    var resolution = Resolution()
+    var interlaced = false
+    func description() -> Void {
+        print("Video interlacing = \(interlaced)")
+    }
+}
+
+var res = Resolution()
+res.width = 1920
+res.description()
+
+let hd = Resolution(width: 1920, height: 1080)
+var cinema = hd
+cinema.width = 2048
+//hd.width = 2048
