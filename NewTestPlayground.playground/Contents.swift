@@ -569,3 +569,45 @@ struct Point0 {
 // 다음은 에러(mutating 을 메소드 앞에 추가해주면 해결!)
 var somePoint0 = Point0()
 somePoint0.moveByX(deltaX: 200.0, deltaY: 300.0)
+
+
+// 13강 옵셔널
+// 원칙 : 스위프트의 일반자료형 변수는 nil이 될 수 없다
+var movie = "깨어난 포스"
+//movie = nil
+// 다음 경우도 오류
+//var otherMovie : String = nil
+
+// 정상적으로 값을 반환할 수 있는 경우
+var num : Int? = Int("Hello")
+num
+
+// 원칙 : Optional 변수는 nil이 될 수 있다
+var optionalMovie1 : String? = "깨어난 포스"
+optionalMovie1 = nil
+var optionalMovie2 : String? = nil
+optionalMovie2 = "깨어난 포스"
+
+//var movie = nil
+
+var num2 : Int? = Int("100")
+
+//다음은 오류
+//var n = Int("100") + Int("300")
+//정상
+var n3 = Int("100")! + Int("300")!
+
+//옵셔널 String과 비옵셔널 String
+var optionalString : String?
+var nonOptionalString : String
+// optional 변수에 아무런 값을 할당하지 않으면 nil 값을 가진다
+optionalString
+// 아래와 같이 !로 강제 unwrapping하면 non Optional이 되어 오류발생
+// 비옵셔널 변수는 nil을 가질 수 없다
+//optionalString!
+// 옵셔널 변수에 새로운 값을 할당
+optionalString = "abcd"
+
+// optional 변수는 강제 unwrapping하여 새로운 값 할당
+optionalString! = "abcd"
+optionalString!.uppercased()
