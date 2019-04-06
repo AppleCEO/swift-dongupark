@@ -528,3 +528,44 @@ ref4.a = 100
 
 //ref4 = ref3
 ref3 = ref4
+
+
+// 12강 구조체의 초기화, 변경가능, 불가능 속성
+
+struct Celsius {
+    var temperatureInCelsius: Double
+    init(fromFahrenheit fahrenheit: Double) {
+        temperatureInCelsius = (fahrenheit - 32.0) / 1.8
+    }
+    init(fromKelvin kelvin: Double) {
+        temperatureInCelsius = kelvin - 273.15
+    }
+}
+let boilingPointOfWater = Celsius(fromFahrenheit: 212.0)
+// boilingPointOfWater.temperatureInCelsius is 100.0
+let freezingPointOfWater = Celsius(fromKelvin: 273.15)
+
+struct Point {
+    var x = 0.0, y = 0.0
+    
+    func isToTheRightOfX( x : Double ) -> Bool {
+        return self.x > x
+    }
+}
+
+var somePoint = Point(x: 4.0, y : 5.0)
+somePoint.x += 10
+somePoint.x
+somePoint.isToTheRightOfX(x: 30)
+
+struct Point0 {
+    var x = 0.0, y = 0.0
+    
+    mutating func moveByX(deltaX : Double, deltaY : Double) {
+        x += deltaX
+        y += deltaY
+    }
+}
+// 다음은 에러(mutating 을 메소드 앞에 추가해주면 해결!)
+var somePoint0 = Point0()
+somePoint0.moveByX(deltaX: 200.0, deltaY: 300.0)
