@@ -387,5 +387,15 @@ incTen()
 incTen()
 incTen()
 
+// 9강 클로저
+
+let array = [1,2,3,4]
+let arrayC = array.map({(i:Int) -> Int in return i * 2})
+let arrayD = array.map({(i:Int) -> Int in return i * i})
+
+// Swift의 newDoubler라는 함수선언 방식 - 클로저를 표현식
+let newDoubler = {(i:Int) -> Int in return i * 2}
+newDoubler(3)
+let arrayE = array.map(newDoubler)
 
 
