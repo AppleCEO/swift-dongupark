@@ -334,3 +334,58 @@ func repeatItem<T>(_ item: T, times: Int) -> [T] {
 repeatItem("knock", times: 4)
 repeatItem(10, times: 4)
 repeatItem(1.1, times: 3)
+
+//8강  중첩함수
+
+/// Swift의 함수 - 중첩함수 샘플 코드
+func funcA() -> Int {
+    var a = 10
+    /// 내부함수 funcB는 변수 a에 접근가능
+    func funcB() {
+        a = a + 10
+    }
+    funcB()
+    
+    return a
+}
+
+funcA()
+
+/// swift 함수 중첩
+func makeInc1() -> ((Int) -> Int)
+{
+    func addOne(number : Int) -> Int {
+        return number+1
+    }
+    
+    return addOne
+}
+
+var increment = makeInc1()
+increment(7)
+
+/// swift 함수 중첩
+func makeInc2(amount: Int) -> () -> Int
+{
+    var runningTotal = 10
+    func incrementor() -> Int {
+        runningTotal += amount
+        return runningTotal
+    }
+    
+    return incrementor
+}
+
+var incFive = makeInc2(amount: 5)
+incFive()
+incFive()
+incFive()
+incFive()
+
+var incTen = makeInc2(amount: 10)
+incTen()
+incTen()
+incTen()
+
+
+
