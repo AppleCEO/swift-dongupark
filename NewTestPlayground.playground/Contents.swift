@@ -800,3 +800,61 @@ number73!.tenant = nil
 john = nil
 number73 = nil
 
+
+// 17강 프로토콜
+
+//SampleProtocol 프로토콜 선언
+protocol SampleProtocol {
+    func desc(name: String)
+}
+
+//var smaple : SampleProtocol = SampleProtocol()
+
+// 구조체 Man, Woman, 클래스 Person 모두 desc()를 구현해야 함
+struct Man : SampleProtocol {
+    func desc(name: String) {
+        print("남자의 이름은 \(name)입니다 ")
+    }
+}
+
+struct Woman : SampleProtocol {
+    func desc(name: String) {
+        print("여자의 이름은 \(name)입니다 ")
+    }
+}
+
+class Person17: SampleProtocol {
+    func desc(name: String) {
+        print("사람의 이름은 \(name)입니다")
+    }
+}
+
+protocol InitProtocol {
+    init()
+    init(name: String)
+}
+
+struct StructInit : InitProtocol {
+    var name : String
+    init() {
+        self.name = "홍길동"
+    }
+    init(name: String) {
+        self.name = name
+    }
+}
+
+class ClassInit : InitProtocol {
+    var name : String
+    required init() {
+        self.name = "홍길동"
+    }
+    required init(name: String) {
+        self.name = name
+    }
+}
+
+protocol TestProtocol {
+    init()
+}
+
