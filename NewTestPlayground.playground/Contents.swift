@@ -858,3 +858,45 @@ protocol TestProtocol {
     init()
 }
 
+
+//18강 guard
+
+// x가 옵셔널이므로 nil일 가능성이 있다
+func fooManualCheck( x: Int? ) {
+    if x == nil {
+        // x가 nil이거나 0 이하이면 일을 하도록 문장을 삽입
+        return
+    }
+    
+    // x를 강제 언래핑하여 일을 함, 이때 x는 확실하게 nil이 아님
+    x!.description
+}
+
+fooManualCheck(x: 200)
+
+// if let 문을 사용함. 이때 x는 비강제 해제(implicitly unwrap)됨
+func fooBinding( x: Int? ) {
+    if let x = x, x > 0 {
+        // Do stuff with x
+        // x!를 사용할 필요가 없다
+        x.description
+    }
+    
+    // Value requirements not met, do something
+}
+
+fooBinding(x: 100)
+
+// guarld esle를 이용한 비강제 해제
+func fooGuard(x: Int?) {
+    guard let x = x, x > 0 else {
+        // 위의 조건을 만족하지 않을 경우 수행됨
+        return
+    }
+    
+    // x는 guard-else 문에 의해 비강제 해제되었음
+    // 안심하고 x의 메소드를 호출할 수 있음
+    x.description
+}
+
+fooGuard(x: -20)
