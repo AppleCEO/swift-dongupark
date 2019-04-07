@@ -669,3 +669,74 @@ if let name = cwnu?.president?.name {
 //cwnu 자체가 nll이라 할당되지 않음
 cwnu?.president?.name = "너총장"
 
+// 15강 클래스
+class VideoMode15 {
+    // 값을 저장하는 프로퍼티(속성)
+    var interlaced = false
+    var framRate = 0.0
+    var name : String?
+    
+    // 인스턴스의 행위를 정의하는 메소드
+    func description() -> Void {
+        if let className = name {
+            print("VideoMode 클래스의 설명 : \(className)")
+        }
+    }
+}
+
+// VideoMode()를 통해 인스턴스를 생성
+var aVideo = VideoMode15()
+// 인스턴스의 프로퍼티에 값을 준다
+aVideo.interlaced = true
+aVideo.name = "1080i"
+// 인스턴스의 메소드 호출을 통해 일을 시킨다
+aVideo.description()
+
+class Car {
+    var speed : Int
+    var color : String
+    // 초기화 구문이 있을경우 초기화는 반드시 하지 않아도 됩니다.
+    init(){
+        speed = 0
+        color = "Red"
+        print("Car 인스턴스가 생성되어 프로퍼티가 초기화됨")
+    }
+    init(color:String){
+        speed = 0
+        self.color = color
+        //  print("Car 인스턴스가 생성되어 프로퍼티가 초기화됨")
+    }
+    
+    deinit {
+        print("Car 인스턴스 해제됨")
+    }
+    
+    func desc() {
+        print("Car.speed = \(self.speed)")
+        print("Car.color = \(self.color)")
+    }
+}
+
+var aCar : Car? = Car()
+aCar!.desc()
+aCar = nil
+
+var bCar : Car? = Car(color: "White")
+bCar!.desc()
+bCar = nil
+
+class RaceCar : Car {
+    var hasTurbo: Bool
+    override init() {
+        hasTurbo = true
+        super.init()
+        print("RaceCar instance가 생성되어 초기화됨")
+    }
+    override func desc() {
+        print("hasTrubo = \(hasTurbo)")
+        super.desc()
+    }
+}
+
+var myCar = RaceCar()
+myCar.desc()
