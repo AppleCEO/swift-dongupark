@@ -611,3 +611,61 @@ optionalString = "abcd"
 // optional 변수는 강제 unwrapping하여 새로운 값 할당
 optionalString! = "abcd"
 optionalString!.uppercased()
+
+
+// 14강 옵셔널체인
+struct Person {
+    var name : String?
+    var age : Int
+}
+
+var person14 : Person? = Person(name:"홍길동", age:27)
+
+//person14 = nil
+//print("이름은 \(person14!.name) 입니다")
+
+if person14 != nil {
+    if person14!.name != nil {
+        print("이름은 \(person14!.name!) 입니다")
+    }
+}
+
+// 이 person은 optional person이다, ! OK
+if let b14 = person14 {
+    // 이 블럭의 b14는 확실히 nil이 아닐 것이다ㅣ(자동으로 unwrapping), 따라서 nonoptional
+    if let name = b14.name {
+        // name 은 확실히 nil이 아닐 것이다
+        // 강제 해제(forced unwrapping '!')를 사용 안해도 implicit unwrapping이 됨
+        print("이름은 \(name) 입니다")
+    }
+}
+
+struct University {
+    var president : Person?
+    var universityName : String?
+    var numOfStudents : Int
+}
+
+// 좀 더 복잡한 예
+var cwnu : University? = University(president:person14, universityName:"창원대학교", numOfStudents : 8400)
+
+// if 구문이 3개나 쓰이는 불편한 구문
+if let university = cwnu {
+    if let president = university.president {
+        if let name = president.name{
+            print("총장의 이름은 \(name)입니다")
+        }
+    }
+}
+
+// 옵셔널 체인을 사용함
+// 아래를 uncomment할 경우 crash가 발생하지 않음
+cwnu = nil
+
+if let name = cwnu?.president?.name {
+    print("총장의 이름은\(name)입니다.")
+}
+
+//cwnu 자체가 nll이라 할당되지 않음
+cwnu?.president?.name = "너총장"
+
