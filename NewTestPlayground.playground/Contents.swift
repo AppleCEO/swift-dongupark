@@ -740,3 +740,63 @@ class RaceCar : Car {
 
 var myCar = RaceCar()
 myCar.desc()
+
+// 16강 자동참조계수, 강한참조, 약한참조
+
+// 자동참조 개수에 의한 객체의 생성과 해제
+// ARC - Authomatic Reference Counting
+class Person16 {
+    var name : String
+    
+    init(name: String) {
+        self.name = name
+        print("\(name) is being initialized")
+    }
+    deinit {
+        print("\(name) is deinitialized")
+    }
+}
+
+var reference1 : Person16?
+var reference2 : Person16?
+var reference3 : Person16?
+
+reference1 = Person16(name: "홍길동")
+
+reference2 = reference1
+reference3 = reference1
+
+reference1 = nil
+reference2 = nil
+//reference3 = nil
+
+class Person16A {
+    let name: String
+    var apartment: Apartment16?
+    init(name: String) { self.name = name }
+    deinit { print("\(name) is being deinitialized")
+    }
+}
+
+class Apartment16 {
+    let number: Int
+    var tenant: Person16A?
+    init(number: Int) { self.number = number }
+    deinit { print("Apartment #\(number) is being deinitialized") }
+}
+
+var john: Person16A?
+var number73: Apartment16?
+
+john = Person16A(name: "John Appleed")
+number73 = Apartment16(number: 77)
+
+john!.apartment = number73
+number73!.tenant = john
+
+john!.apartment = nil
+number73!.tenant = nil
+
+john = nil
+number73 = nil
+
