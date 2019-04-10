@@ -900,3 +900,125 @@ func fooGuard(x: Int?) {
 }
 
 fooGuard(x: -20)
+
+
+// 19강 오류처리
+
+enum CarEngineErrors : Error {
+    case NoFuel
+    case OilLeak
+    case LowBattery
+}
+
+func checkEngine() throws {
+    let fuelReserve = 20.0
+    let oilOK = true
+    let batteryReserve = 0.0
+    
+    guard fuelReserve > 0.0 else {
+        throw CarEngineErrors.NoFuel
+    }
+    guard oilOK else {
+        throw CarEngineErrors.OilLeak
+    }
+    guard batteryReserve > 0.0 else {
+        throw CarEngineErrors.LowBattery
+    }
+}
+
+func startEngine() {
+    do {
+        try checkEngine()
+    }
+    catch CarEngineErrors.LowBattery {
+        print("밧데리 충전이 필요합니다.")
+    }
+    catch CarEngineErrors.NoFuel {
+        print("기름이 부족합니다")
+    }
+    catch {
+        print("차량 점검이 필요합니다")
+    }
+}
+
+startEngine()
+
+
+// 20강 집합형
+
+// 배열형 자료
+// Set형 선언을 하지않고 집단데이터를 생성하면 디폴트로 Array 자료형으로 선언됨
+var arrayGenre = ["Action", "Documentary", "Romance", "Horror"]
+var arrayString : Array = ["Action", "Documentary", "Romance", "Horror"]
+
+// 집합형 자료
+var movieGenre : Set = ["Action", "Documentary", "Romance", "Horror"]
+var genre : Set<String> = ["Action", "Documentary", "Romance", "Horror"]
+
+var myGenre : Set<String> = []
+myGenre.insert("Action")
+myGenre.insert("Romance")
+
+myGenre.count
+
+if myGenre.contains("Action") {
+    print("Action Genre is an element of myGenre")
+} else {
+    print("Action Genre is not an elemnt of myGenre")
+}
+
+var yourGenre : Array<String> = []
+yourGenre.insert("Action", at:0)
+yourGenre.insert("Romance", at:1)
+
+yourGenre.count
+
+if yourGenre.contains("Action") {
+    print("Action Genre is an element of yourGenre")
+}
+else {
+    print("Action Genre is not included in yourGenre")
+}
+
+yourGenre.insert("Action", at:2)
+yourGenre.count
+
+var oddDigits: Set = [1, 3, 5, 7, 9]
+let evenDigits: Set = [0, 2, 4, 6, 8]
+let singleDigitPrimeNumbers: Set = [2, 3, 5, 7]
+
+oddDigits.union(evenDigits).sorted()
+oddDigits.intersection(evenDigits)
+oddDigits.subtract(singleDigitPrimeNumbers)
+
+oddDigits
+
+// 21강 클로저강한참조순환
+class HTMLElement {
+    let name : String
+    let text : String?
+    
+    lazy var asHTML : () -> String = {
+        [unowned self] in       // 추가해주면 deinit이 아래에서 제대로 동작한다.
+        if let text = self.text {
+            return "<\(self.name)>\(text) </\(self.name)>"
+        }
+        else {
+            return "<\(self.name) />"
+        }
+    }
+    
+    init(name:String, text: String? = nil) {
+        self.name = name
+        self.text = text
+    }
+    
+    deinit {
+        print("\(name) is being deinitialized")
+    }
+}
+
+var paragraph: HTMLElement? = HTMLElement(name: "p", text: "Hello world")
+paragraph!.asHTML()
+
+paragraph = nil
